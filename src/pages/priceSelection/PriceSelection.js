@@ -2,9 +2,6 @@ import React, { useEffect, useState, Component } from "react";
 import CircleLeft from "../../components/circle/CircleLeft.js";
 import CircleRight from "../../components/circle/CircleRight.js";
 import ReactPlayer from "react-player";
-import videoAd from "../../assets/video/flavourAdVideo.mp4";
-import potraitVideoAd from "../../assets/video/potrait.mp4";
-import video1 from "../../assets/video/smallsizeVideoad1.mp4";
 export default class PriceSelection extends Component {
   constructor(props) {
     super(props);
