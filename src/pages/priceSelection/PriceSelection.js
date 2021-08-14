@@ -12,8 +12,30 @@ export default class PriceSelection extends Component {
         code: "quantitySizePrice",
       },
 
-       video: props.props.videoB64
+      video: props.props.videoB64,
     };
+    this.setCurrency = this.setCurrency.bind(this);
+  }
+
+  setCurrency(currency, part) {
+    if (part === "left") {
+      this.setState({
+        leftSelection: {
+          name: this.state.leftSelection.name,
+          code: this.state.leftSelection.code,
+          currency: currency,
+        },
+      });
+    }
+    if (part === "right") {
+      this.setState({
+        rightSelection: {
+          name: this.state.rightSelection.name,
+          code: this.state.rightSelection.code,
+          currency: currency,
+        },
+      });
+    }
   }
 
   render() {
@@ -30,8 +52,8 @@ export default class PriceSelection extends Component {
       { name: "blank", code: "blank" },
     ];
 
-    console.log("Props",this.props)
-    console.log("States",this.state)
+    console.log("Props", this.props);
+    console.log("States", this.state);
 
     return (
       <div className="container">
@@ -47,10 +69,77 @@ export default class PriceSelection extends Component {
                     style={{ cursor: "pointer" }}
                     onClick={() => this.setState({ leftSelection: item })}
                   >
-                    <CircleLeft code={item.code} />
+                    <CircleRight selection={item} />
                   </div>
                 );
               })}
+            </div>
+
+            <div style={{ marginTop: "2em" }}>
+              <p style={{ fontSize: "15px", fontWeight: "bold" }}>Price</p>
+              <div style={{ display: "flex" }}>
+                <div style={{ margin: "1em" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="noCurrency"
+                    id="flexCheckDefault"
+                    style={{ height: "1em", width: "1em" }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      this.setCurrency(e.target.value, "left");
+                    }}
+                    name="flexRadioDefault1"
+                  ></input>
+                  <label
+                    style={{ fontSize: "15px", fontWeight: "bold" }}
+                    class="form-check-label"
+                    for="flexCheckDefault"
+                  >
+                    No Currency
+                  </label>
+                </div>
+                <div style={{ margin: "1em" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="sterling"
+                    id="flexCheckDefault"
+                    name="flexRadioDefault1"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      this.setCurrency(e.target.value, "left");
+                    }}
+                  ></input>
+                  <label
+                    style={{ fontSize: "15px", fontWeight: "bold" }}
+                    class="form-check-label"
+                    for="flexCheckDefault"
+                  >
+                    Sterling (£)
+                  </label>
+                </div>
+                <div style={{ margin: "1em" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="euro"
+                    id="flexCheckDefault"
+                    name="flexRadioDefault1"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      this.setCurrency(e.target.value, "left");
+                    }}
+                  ></input>
+                  <label
+                    style={{ fontSize: "15px", fontWeight: "bold" }}
+                    class="form-check-label"
+                    for="flexCheckDefault"
+                  >
+                    Euro (€)
+                  </label>
+                </div>
+              </div>
             </div>
 
             <p style={{ fontSize: "22px", fontWeight: "bold" }}>
@@ -63,10 +152,81 @@ export default class PriceSelection extends Component {
                     style={{ cursor: "pointer" }}
                     onClick={() => this.setState({ rightSelection: item })}
                   >
-                    <CircleRight code={item.code} />
+                    <CircleLeft selection={item} />
                   </div>
                 );
               })}
+            </div>
+
+            <div style={{ marginTop: "2em" }}>
+              <p style={{ fontSize: "15px", fontWeight: "bold" }}>Price</p>
+              <div class="form-check">
+              <div style={{ display: "flex" }}>
+                <div style={{ margin: "1em" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="noCurrency"
+                    id="flexRadioDefault1"
+                    name="flexRadioDefault12"
+                    style={{ height: "1em", width: "1em" }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      this.setCurrency(e.target.value, "right");
+                    }}
+                  ></input>
+                  <label
+                    style={{ fontSize: "15px", fontWeight: "bold" }}
+                    class="form-check-label"
+                    for="flexCheckDefault"
+                  >
+                    No Currency
+                  </label>
+                </div>
+                <div style={{ margin: "1em" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="sterling"
+                    id="flexRadioDefault1"
+                    name="flexRadioDefault12"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      this.setCurrency(e.target.value, "right");
+                    }}
+                  ></input>
+                  <label
+                    style={{ fontSize: "15px", fontWeight: "bold" }}
+                    class="form-check-label"
+                    for="flexCheckDefault"
+                  >
+                    Sterling (£)
+                  </label>
+                </div>
+                <div style={{ margin: "1em" }}>
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    value="euro"
+                    id="flexRadioDefault1"
+                    name="flexRadioDefault12"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      this.setCurrency(e.target.value, "right");
+                    }}
+                  ></input>
+                  <label
+                    style={{ fontSize: "15px", fontWeight: "bold" }}
+                    class="form-check-label"
+                    for="flexCheckDefault"
+                  >
+                    Euro (€)
+                  </label>
+                </div>
+              </div>
+            
+              </div>
+            
             </div>
 
             <div style={{ display: "flex" }}>
@@ -74,7 +234,7 @@ export default class PriceSelection extends Component {
                 type="button"
                 class="btn btn-primary"
                 style={{ margin: "1em" }}
-                onClick={() =>this.props.setPageName("fileUpload")}
+                onClick={() => this.props.setPageName("fileUpload")}
               >
                 Reset
               </button>
@@ -91,17 +251,23 @@ export default class PriceSelection extends Component {
             <div
               style={{
                 display: "flex",
-                 margin: "2em",
-                width:"40em"
+                margin: "2em",
+                width: "40em",
               }}
             >
               <div
-                style={{ zIndex: "10px", position: "absolute", marginTop:"2em",marginLeft:"24%" }}
+                style={{
+                  zIndex: "10px",
+                  position: "absolute",
+                  marginTop: "2em",
+                  marginLeft: "24%",
+                }}
               >
-                <CircleRight
-                  code={this.state.leftSelection.code}
-                  bgColor={"white"}
-                />
+                  <CircleRight
+                selection={this.state.rightSelection  }
+                bgColor={"white"}
+                currency={this.state.rightSelection.currency}
+              />
               </div>
             </div>
             <ReactPlayer
@@ -122,10 +288,12 @@ export default class PriceSelection extends Component {
                 position: "absolute",
               }}
             >
-              <CircleLeft
-                code={this.state.rightSelection.code}
-                bgColor={"white"}
-              />
+                  <CircleLeft
+                  selection={this.state.leftSelection}
+                  bgColor={"white"}
+                  currency={this.state.leftSelection.currency}
+                />
+        
             </div>
           </div>
         </div>

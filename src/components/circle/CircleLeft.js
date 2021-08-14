@@ -4,10 +4,30 @@ export default class CircleLeft extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.getCurrencyValue = this.getCurrencyValue.bind(this);
+  }
+
+  getCurrencyValue(type,value){
+    console.log("--",type,value);
+    if(type==="noCurrency"){
+      return value;
+    }
+    else if(type==="euro"){
+      return "€"+value
+    }
+    else if(type==="sterling"){
+      return "£"+value
+    }
+    else{
+      return value
+    }
+    
   }
 
   render() {
-    if (this.props.code === "upDown") {
+    console.log(this.props);
+    if (this.props.selection.code === "upDown") {
       return (
         <>
           <div
@@ -30,7 +50,9 @@ export default class CircleLeft extends Component {
                   fontWeight: "700",
                 }}
               >
-                3
+                {
+                this.getCurrencyValue(this.props.currency,3)
+                }
               </p>
               <p
                 style={{
@@ -39,7 +61,8 @@ export default class CircleLeft extends Component {
                   fontWeight: "700",
                 }}
               >
-                25
+           25
+              
               </p>
             </div>
             <div
@@ -58,7 +81,9 @@ export default class CircleLeft extends Component {
                   fontWeight: "700",
                 }}
               >
-                2
+                 {
+                this.getCurrencyValue(this.props.currency,2)
+                }
               </p>
               <p
                 style={{
@@ -67,13 +92,13 @@ export default class CircleLeft extends Component {
                   fontWeight: "700",
                 }}
               >
-                09
+               9
               </p>
             </div>
           </div>
         </>
       );
-    } else if (this.props.code === "normal") {
+    } else if (this.props.selection.code === "normal") {
       return (
         <>
           <div
@@ -96,7 +121,9 @@ export default class CircleLeft extends Component {
                   fontWeight: "700",
                 }}
               >
-                3
+                {
+                this.getCurrencyValue(this.props.currency,3)
+                }
               </p>
               <p
                 style={{
@@ -113,7 +140,7 @@ export default class CircleLeft extends Component {
       );
     }
     
-    else if (this.props.code === "quantitySizePrice") {
+    else if (this.props.selection.code === "quantitySizePrice") {
         return (
           <>
             <div
@@ -145,7 +172,9 @@ export default class CircleLeft extends Component {
                     fontWeight: "800",
                   }}
                 >
-                  5
+                  {
+                this.getCurrencyValue(this.props.currency,5)
+                }
                 </p>
              
             </div>
