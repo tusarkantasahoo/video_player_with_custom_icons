@@ -4,197 +4,373 @@ export default class CircleRight extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
     this.getCurrencyValue = this.getCurrencyValue.bind(this);
+    this.renderCirclesBySelection = this.renderCirclesBySelection.bind(this);
   }
 
-  getCurrencyValue(type,value){
-    console.log("--",type,value);
-    if(type==="noCurrency"){
+  getCurrencyValue(type, value) {
+    console.log("--", type, value);
+    if (type === "noCurrency") {
+      return value;
+    } else if (type === "euro") {
+      return "€" + value;
+    } else if (type === "sterling") {
+      return "£" + value;
+    } else {
       return value;
     }
-    else if(type==="euro"){
-      return "€"+value
-    }
-    else if(type==="sterling"){
-      return "£"+value
-    }
-    else{
-      return value
-    }
-    
   }
 
-  render() {
-    console.log(this.props);
-    if (this.props.selection.code === "upDown") {
-      return (
-        <>
-          <div
-            style={{
-              height: "7em",
-              width: "7em",
-              borderRadius: "7em",
-              border: "1px solid black",
-              textAlign: "center",
-              margin: "1em",
-              backgroundColor: this.props.bgColor
-            }}
-          >
-            <p style={{ fontWeight: "700" }}>Large</p>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <p
-                style={{
-                  fontSize: "2.5em",
-                  marginTop: "-30%",
-                  fontWeight: "700",
-                }}
-              >
-                  {
-                this.getCurrencyValue(this.props.currency,3)
-                }
-              </p>
-              <p
-                style={{
-                  fontSize: "18px",
-                  marginTop: "-15%",
-                  fontWeight: "700",
-                }}
-              >
-               25
-              </p>
-            </div>
-            <div
-              style={{
-                height: "2px",
-                backgroundColor: "black",
-                marginTop: "-26%",
-              }}
-            ></div>
-            <p style={{ fontWeight: "700", marginTop: "0px" }}>Medium</p>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <p
-                style={{
-                  fontSize: "2.5em",
-                  marginTop: "-35%",
-                  fontWeight: "700",
-                }}
-              >
-                  {
-                this.getCurrencyValue(this.props.currency,2)
-                }
-              </p>
-              <p
-                style={{
-                  fontSize: "18px",
-                  marginTop: "-15%",
-                  fontWeight: "700",
-                }}
-              >
-                09
-              </p>
-            </div>
-          </div>
-        </>
-      );
-    } else if (this.props.selection.code === "normal") {
-      return (
-        <>
-          <div
-            style={{
-              height: "7em",
-              width: "7em",
-              borderRadius: "7em",
-              border: "1px solid black",
-              textAlign: "center",
-              margin: "1em",
-              backgroundColor: this.props.bgColor
-            }}
-          >
-            <p style={{ fontWeight: "700", marginTop: "0.5em" }}>Large</p>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <p
-                style={{
-                  fontSize: "3em",
-                  marginTop: "-30%",
-                  fontWeight: "700",
-                }}
-              >
-                  {
-                this.getCurrencyValue(this.props.currency,3)
-                }
-              </p>
-              <p
-                style={{
-                  fontSize: "18px",
-                  marginTop: "-15%",
-                  fontWeight: "700",
-                }}
-              >
-              25
-              </p>
-            </div>
-          </div>
-        </>
-      );
-    }
-    
-    else if (this.props.selection.code === "quantitySizePrice") {
+  renderCirclesBySelection(item) {
+    switch (item.code) {
+      case "blank":
         return (
           <>
             <div
+              className="circleLeftCards"
               style={{
                 height: "7em",
                 width: "7em",
                 borderRadius: "7em",
-                border: "1px solid black",
+                border: "2px solid black",
                 textAlign: "center",
+                backgroundColor: this.props.bgColor,
                 margin: "1em",
-                backgroundColor: this.props.bgColor
+              }}
+            ></div>
+          </>
+        );
+
+      case "large/Medium":
+        return (
+          <>
+            <div
+              className="circleLeftCards"
+              style={{
+                height: "7em",
+                width: "7em",
+                borderRadius: "7em",
+                border: "2px solid black",
+                textAlign: "center",
+                backgroundColor: this.props.bgColor,
+                margin: "1em",
               }}
             >
-              <p style={{ fontWeight: "800", marginTop: "0",fontSize:"25px" }}>2</p>
-          
-                <p
-                  style={{
-                    fontSize: "22px",
-                    marginTop: "-1em",
-                    fontWeight: "800",
-                  }}
-                >
-                  Mediums
-                </p>
-                <p
-                  style={{
-                    fontSize: "42px",
-                    marginTop: "-30%",
-                    fontWeight: "800",
-                  }}
-                >
-                {
-                this.getCurrencyValue(this.props.currency,5)
-                }
-                </p>
-             
+              <p style={{ fontWeight: "800", marginTop: "1em" }}>Large</p>
+              <div
+                id="line"
+                style={{
+                  width: "80%",
+                  marginLeft: "10%",
+                  height: "4px",
+                  backgroundColor: "black",
+                  border: "2px solid black",
+                }}
+              ></div>
+              <p style={{ fontWeight: "800", marginTop: "0.5em" }}>Medium</p>
             </div>
           </>
         );
-      }
 
-    else {
-      return (
-        <>
-          <div
-            style={{
-              height: "7em",
-              width: "7em",
-              borderRadius: "7em",
-              border: "1px solid black",
-              textAlign: "center",
-              margin: "1em",
-            }}
-          ></div>
-        </>
-      );
+      case "twisterOup":
+        return (
+          <>
+            <div
+              className="circleLeftCards"
+              style={{
+                height: "7em",
+                width: "7em",
+                borderRadius: "7em",
+                border: "2px solid black",
+                textAlign: "center",
+                backgroundColor: this.props.bgColor,
+                margin: "1em",
+              }}
+            >
+              <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                Twister <br></br> Oup
+              </p>
+            </div>
+          </>
+        );
+
+      case "21oz":
+        return (
+          <>
+            <div
+              className="circleLeftCards"
+              style={{
+                height: "7em",
+                width: "7em",
+                borderRadius: "7em",
+                border: "2px solid black",
+                textAlign: "center",
+                backgroundColor: this.props.bgColor,
+                margin: "1em",
+              }}
+            >
+              <p style={{ fontWeight: "800", marginTop: "2em" }}>21oz</p>
+            </div>
+          </>
+        );
+
+      case "12oz":
+        return (
+          <>
+            <div
+              className="circleLeftCards"
+              style={{
+                height: "7em",
+                width: "7em",
+                borderRadius: "7em",
+                border: "2px solid black",
+                textAlign: "center",
+                backgroundColor: this.props.bgColor,
+                margin: "1em",
+              }}
+            >
+              <p style={{ fontWeight: "800", marginTop: "2em" }}>12oz</p>
+            </div>
+          </>
+        );
+
+      case "medium":
+        return (
+          <>
+            <div
+              className="circleLeftCards"
+              style={{
+                height: "7em",
+                width: "7em",
+                borderRadius: "7em",
+                border: "2px solid black",
+                textAlign: "center",
+                backgroundColor: this.props.bgColor,
+                margin: "1em",
+              }}
+            >
+              <p style={{ fontWeight: "800", marginTop: "2em" }}>Medium</p>
+            </div>
+          </>
+        );
+
+      case "2medium":
+        return (
+          <>
+            <div
+              className="circleLeftCards"
+              style={{
+                height: "7em",
+                width: "7em",
+                borderRadius: "7em",
+                border: "2px solid black",
+                textAlign: "center",
+                backgroundColor: this.props.bgColor,
+                margin: "1em",
+              }}
+            >
+              <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                2 Medium
+              </p>
+            </div>
+          </>
+        );
+
+        case "blankLine":
+          return (
+            <>
+              <div
+                className="circleLeftCards"
+                style={{
+                  height: "7em",
+                  width: "7em",
+                  borderRadius: "7em",
+                  border: "2px solid black",
+                  textAlign: "center",
+                  backgroundColor: this.props.bgColor,
+                  margin: "1em",
+                }}
+              >
+               <div
+                id="line"
+                style={{
+                  width: "80%",
+                  marginLeft: "10%",
+                  height: "4px",
+                  backgroundColor: "black",
+                  border: "2px solid black",
+                  marginTop: "3em"
+                }}
+              ></div>
+              </div>
+            </>
+          );
+
+          case "21oz/12oz":
+            return (
+              <>
+                <div
+                  className="circleLeftCards"
+                  style={{
+                    height: "7em",
+                    width: "7em",
+                    borderRadius: "7em",
+                    border: "2px solid black",
+                    textAlign: "center",
+                    backgroundColor: this.props.bgColor,
+                    margin: "1em",
+                  }}
+                >
+                  <p style={{ fontWeight: "800", marginTop: "1em" }}>21oz</p>
+                  <div
+                    id="line"
+                    style={{
+                      width: "80%",
+                      marginLeft: "10%",
+                      height: "4px",
+                      backgroundColor: "black",
+                      border: "2px solid black",
+                    }}
+                  ></div>
+                  <p style={{ fontWeight: "800", marginTop: "0.5em" }}>12oz</p>
+                </div>
+              </>
+            );
+
+            case "large":
+              return (
+                <>
+                  <div
+                    className="circleLeftCards"
+                    style={{
+                      height: "7em",
+                      width: "7em",
+                      borderRadius: "7em",
+                      border: "2px solid black",
+                      textAlign: "center",
+                      backgroundColor: this.props.bgColor,
+                      margin: "1em",
+                    }}
+                  >
+                    <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                      Large
+                    </p>
+                  </div>
+                </>
+              );
+              case "2for":
+                return (
+                  <>
+                    <div
+                      className="circleLeftCards"
+                      style={{
+                        height: "7em",
+                        width: "7em",
+                        borderRadius: "7em",
+                        border: "2px solid black",
+                        textAlign: "center",
+                        backgroundColor: this.props.bgColor,
+                        margin: "1em",
+                      }}
+                    >
+                      <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                        2 for
+                      </p>
+                    </div>
+                  </>
+                );
+                case "300ml":
+                  return (
+                    <>
+                      <div
+                        className="circleLeftCards"
+                        style={{
+                          height: "7em",
+                          width: "7em",
+                          borderRadius: "7em",
+                          border: "2px solid black",
+                          textAlign: "center",
+                          backgroundColor: this.props.bgColor,
+                          margin: "1em",
+                        }}
+                      >
+                        <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                        300 ml
+                        </p>
+                      </div>
+                    </>
+                  );
+                  case "500ml":
+                    return (
+                      <>
+                        <div
+                          className="circleLeftCards"
+                          style={{
+                            height: "7em",
+                            width: "7em",
+                            borderRadius: "7em",
+                            border: "2px solid black",
+                            textAlign: "center",
+                            backgroundColor: this.props.bgColor,
+                            margin: "1em",
+                          }}
+                        >
+                          <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                          500 ml
+                          </p>
+                        </div>
+                      </>
+                    );
+                    case "test":
+                      return (
+                        <>
+                          <div
+                            className="circleLeftCards"
+                            style={{
+                              height: "7em",
+                              width: "7em",
+                              borderRadius: "7em",
+                              border: "2px solid black",
+                              textAlign: "center",
+                              backgroundColor: this.props.bgColor,
+                              margin: "1em",
+                            }}
+                          >
+                            <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                              Test
+                            </p>
+                          </div>
+                        </>
+                      );
+                      case "refill":
+                      return (
+                        <>
+                          <div
+                            className="circleLeftCards"
+                            style={{
+                              height: "7em",
+                              width: "7em",
+                              borderRadius: "7em",
+                              border: "2px solid black",
+                              textAlign: "center",
+                              backgroundColor: this.props.bgColor,
+                              margin: "1em",
+                            }}
+                          >
+                            <p style={{ fontWeight: "800", marginTop: "2em" }}>
+                              Re Fill
+                            </p>
+                          </div>
+                        </>
+                      );
+
+      default:
+        return null;
     }
+  }
+
+  render() {
+    return <>{this.renderCirclesBySelection(this.props.selection)}</>;
   }
 }

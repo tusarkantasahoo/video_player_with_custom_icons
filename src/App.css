@@ -1,0 +1,12 @@
+.circleLeftCards:hover {
+  background-color: black;
+  color: white;
+}
+
+.circleLeftCards:hover + #line {
+  background-color: white;
+}
+/* .circleLeftCards.div:hover {
+  background-color: rgb(240, 235, 235);
+  color: white;
+} */
